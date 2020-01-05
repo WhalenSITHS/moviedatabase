@@ -1,0 +1,22 @@
+{
+  "name": "moviedatabase",
+  "version": "1.0.0",
+  "description": "day 1\r go over mongodb, what it is, why we need it security adn speed\r create gitignore, package.json and early folder structure",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.4.1",
+    "mongoose": "^5.8.4",
+    "validator": "^12.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

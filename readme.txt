@@ -1,4 +1,5 @@
 day 1
+install nodemon globally idiot!!!!!!!!!
 go over mongodb, what it is, why we need it security adn speed
 create gitignore, package.json and early folder structure
 npm i express, mongodb, mongoose

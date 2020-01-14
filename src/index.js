@@ -10,3 +10,17 @@ app.use(userRouter);
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });
+const bcrypt = require("bcryptjs");
+
+const testFunction = async () => {
+  const password = "siths1234";
+  const hashedPassword = await bcrypt.hash(password, 8);
+
+  console.log(password);
+  console.log(hashedPassword);
+
+  const isMatch = await bcrypt.compare("siths1234", hashedPassword);
+  console.log(isMatch);
+};
+
+testFunction();

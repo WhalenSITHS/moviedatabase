@@ -34,10 +34,9 @@ router.patch("/movies/:id", async (req, res) => {
       .send({ error: "Invalid Updates, please only update the review" });
   }
   try {
-    const movie = await Movie.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
+    const movie = await Movie.findById(req.params.id);
+    updates.forEach(update => (task[update] = req.body[update]));
+    await movie.save();
     if (!movie) {
       return res.status(404).send();
     }

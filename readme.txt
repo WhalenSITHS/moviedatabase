@@ -23,3 +23,15 @@ continue with CRUD with patch and delete
 show them user router create the login route first with userLogin method WE create. Then Create that method in the model together. 
 Also ensure you add the unique property to the user schema and DROP THE COLLECTION
 If you do not drop the collection then unique will not work. 
+
+
+***********JWT
+Show JWT in router and method and send token back. Then fix the model and the method you made to add token to token array
+
+
+*********Auth Middleware
+headers in postman using token!
+Authorization Bearer token
+
+users/me request MUST MUST MUST be above the :id request for some reason
+if in auth middleware the kids dont do "bearer " and instead do "bearer" then it will not work

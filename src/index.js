@@ -10,9 +10,9 @@ app.use(userRouter);
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });
-const bcrypt = require("bcryptjs");
+//const bcrypt = require("bcryptjs");
 
-const testFunction = async () => {
+/* const testFunction = async () => {
   const password = "siths1234";
   const hashedPassword = await bcrypt.hash(password, 8);
 
@@ -24,3 +24,18 @@ const testFunction = async () => {
 };
 
 testFunction();
+ */
+/* const jwt = require("jsonwebtoken");
+
+const myFunction = async () => {
+  const token = jwt.sign({ _id: "userIdHere" }, "obeysudo", {
+    expiresIn: "3 days"
+  });
+  console.log(token);
+
+  const data = jwt.verify(token, "obeysudo");
+  console.log(data);
+};
+
+myFunction();
+ */

@@ -16,3 +16,10 @@ npm i validator
 add validation for required
 
 continue with CRUD with patch and delete
+
+
+
+*******logging in!
+show them user router create the login route first with userLogin method WE create. Then Create that method in the model together. 
+Also ensure you add the unique property to the user schema and DROP THE COLLECTION
+If you do not drop the collection then unique will not work. 

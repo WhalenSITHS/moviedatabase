@@ -35,3 +35,9 @@ Authorization Bearer token
 
 users/me request MUST MUST MUST be above the :id request for some reason
 if in auth middleware the kids dont do "bearer " and instead do "bearer" then it will not work
+
+
+*****postman setup
+add environment vairable authtoken
+edit api settings to have authtoken vairable
+add javascript code on login to create global authtoken variable

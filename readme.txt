@@ -41,3 +41,7 @@ if in auth middleware the kids dont do "bearer " and instead do "bearer" then it
 add environment vairable authtoken
 edit api settings to have authtoken vairable
 add javascript code on login to create global authtoken variable
+
+
+
+****logout, have them attempt it on their own with pseudo code

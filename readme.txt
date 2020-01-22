@@ -45,3 +45,10 @@ add javascript code on login to create global authtoken variable
 
 
 ****logout, have them attempt it on their own with pseudo code
+
+
+
+*****Login auth changes
+We return the user object but this time we remove the user password and tokens so they remain unexposed
+**Explain toObject() and toJSON() 
+Refer to the mongoose docs and CLICK THE LINKS!!! Show them the documentation 

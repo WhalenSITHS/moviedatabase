@@ -3,10 +3,12 @@ require("./db/mongoose"); //ensures mongoose runs and connects
 const app = express();
 const movieRouter = require("./routers/movies");
 const userRouter = require("./routers/user");
+const reviewRouter = require("./routers/reviews");
 const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(movieRouter);
 app.use(userRouter);
+app.use(reviewRouter);
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });

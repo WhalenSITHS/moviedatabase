@@ -9,10 +9,6 @@ const Movie = mongoose.model("movie", {
   year: {
     type: Number,
     required: true
-  },
-  review: {
-    type: String,
-    required: false
   }
 });
 module.exports = Movie;

@@ -35,7 +35,7 @@ router.patch("/movies/:id", async (req, res) => {
   }
   try {
     const movie = await Movie.findById(req.params.id);
-    updates.forEach(update => (task[update] = req.body[update]));
+    updates.forEach(update => (movie[update] = req.body[update]));
     await movie.save();
     if (!movie) {
       return res.status(404).send();

@@ -1,3 +1,4 @@
+You left task ijn teh patch route early in the project, please fix for next year
 day 1
 go over mongodb, what it is, why we need it security adn speed
 create gitignore, package.json and early folder structure
@@ -52,3 +53,9 @@ add javascript code on login to create global authtoken variable
 We return the user object but this time we remove the user password and tokens so they remain unexposed
 **Explain toObject() and toJSON() 
 Refer to the mongoose docs and CLICK THE LINKS!!! Show them the documentation 
+
+****reviews for HW. Ensure they add filtering by specific movie and add validation that reviews are between 1 and 5
+
+
+
+****create relationship between user and reviews

@@ -1,6 +1,7 @@
 const express = require("express");
 require("./db/mongoose"); //ensures mongoose runs and connects
 const app = express();
+//const mongoose = require("mongoose");
 const movieRouter = require("./routers/movies");
 const userRouter = require("./routers/user");
 const reviewRouter = require("./routers/reviews");
@@ -41,3 +42,19 @@ const myFunction = async () => {
 
 myFunction();
  */
+
+const Review = require("./models/review");
+const User = require("./models/user");
+/* const main = async () => {
+  const review = await Review.findById("5e2dc9a60dca161d1841da34");
+  await review.populate("owner").execPopulate();
+  console.log(review.owner);
+};
+main(); */
+
+const main = async () => {
+  const user = await User.findById("5e20907844e92533f4a9fe36");
+  await user.populate("reviews").execPopulate();
+  console.log(user.reviews);
+};
+main();

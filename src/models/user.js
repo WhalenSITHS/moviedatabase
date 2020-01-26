@@ -45,6 +45,13 @@ const userSchema = new mongoose.Schema({
     }
   ]
 });
+
+userSchema.virtual("reviews", {
+  ref: "Review",
+  localField: "_id", //Where local data is stored
+  foreignField: "owner" //where this data exists on the other document, in this case we called it owner on the Review model
+});
+
 userSchema.methods.toJSON = function() {
   const user = this;
   const userObject = user.toObject();

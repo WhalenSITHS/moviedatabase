@@ -1,10 +1,15 @@
 const express = require("express");
 const Review = require("../models/review");
+const auth = require("../middleware/auth");
 const router = new express.Router();
 
-router.post("/reviews", async (req, res) => {
+router.post("/reviews", auth, async (req, res) => {
+  //const review = new Review(req.body);
+  const review = new Review({
+    ...req.body,
+    owner: req.user._id
+  });
   try {
-    const review = new Review(req.body);
     await review.save();
     res.send(review);
   } catch (error) {

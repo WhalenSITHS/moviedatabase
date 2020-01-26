@@ -25,7 +25,7 @@ router.post("/users/login", async (req, res) => {
     res.send({ user, token });
   } catch (error) {
     console.log(error);
-    res.status(400).send(error);
+    res.status(400).send("user not found");
   }
 });
 router.post("/users/logout", auth, async (req, res) => {
@@ -35,7 +35,7 @@ router.post("/users/logout", auth, async (req, res) => {
     });
     await req.user.save();
 
-    res.send();
+    res.send("You are Logged Out Now");
   } catch (e) {
     res.status(500).send();
   }

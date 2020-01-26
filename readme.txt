@@ -46,6 +46,7 @@ add javascript code on login to create global authtoken variable
 
 
 ****logout, have them attempt it on their own with pseudo code
+WE NEED TO CHANGE auth.js tooooo
 
 
 
@@ -59,3 +60,6 @@ Refer to the mongoose docs and CLICK THE LINKS!!! Show them the documentation
 
 
 ****create relationship between user and reviews
+Drop the collection again (maybe we can just delete reviews?)
+
+Error I made. In review model I did not use uppercase R for the model!!!!!

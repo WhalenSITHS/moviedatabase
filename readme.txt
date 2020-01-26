@@ -63,3 +63,7 @@ Refer to the mongoose docs and CLICK THE LINKS!!! Show them the documentation
 Drop the collection again (maybe we can just delete reviews?)
 
 Error I made. In review model I did not use uppercase R for the model!!!!!
+
+
+***authenticating reviews
+add auth to reviews/:id

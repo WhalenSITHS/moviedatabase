@@ -25,6 +25,14 @@ router.get("/reviews", async (req, res) => {
     res.status(500).send(error);
   }
 });
+router.get("/reviews/me", auth, async (req, res) => {
+  try {
+    await req.user.populate("reviews").execPopulate();
+    res.send(req.user.reviews);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 router.get("/reviews/:id", async (req, res) => {
   const movie = req.params.id;
   try {
@@ -34,9 +42,10 @@ router.get("/reviews/:id", async (req, res) => {
     res.status(500).send(error);
   }
 });
-router.patch("/reviews/:id", async (req, res) => {
+
+router.patch("/reviews/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["reviewText"];
+  const allowedUpdates = ["reviewText", "reviewScore"];
   const isValidOperation = updates.every(update =>
     allowedUpdates.includes(update)
   );
@@ -46,27 +55,36 @@ router.patch("/reviews/:id", async (req, res) => {
       .send({ error: "Invalid Updates, please only update the review text" });
   }
   try {
-    const review = await Review.findById(req.params.id);
-    updates.forEach(update => (review[update] = req.body[update]));
-    await review.save();
+    const review = await Review.findOne({
+      _id: req.params.id,
+      owner: req.user._id
+    });
     if (!review) {
       return res.status(404).send();
     }
+    updates.forEach(update => (review[update] = req.body[update]));
+    await review.save();
     res.send(review);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
-router.delete("/reviews/:id", async (req, res) => {
+router.delete("/reviews/:id", auth, async (req, res) => {
   try {
-    const review = await Review.findByIdAndDelete(req.params.id);
+    const review = await Review.findOneAndDelete({
+      _id: req.params.id,
+      owner: req.user._id
+    });
+
     if (!review) {
       res.status(404).send();
     }
+
     res.send(review);
-  } catch (error) {
-    res.status(500).send(error);
+  } catch (e) {
+    res.status(500).send();
   }
 });
+
 module.exports = router;

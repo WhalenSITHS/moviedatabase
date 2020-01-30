@@ -52,9 +52,9 @@ const User = require("./models/user");
 };
 main(); */
 
-const main = async () => {
+/* const main = async () => {
   const user = await User.findById("5e20907844e92533f4a9fe36");
   await user.populate("reviews").execPopulate();
   console.log(user.reviews);
 };
-main();
+main(); */

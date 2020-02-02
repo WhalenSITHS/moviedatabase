@@ -1,6 +1,7 @@
 //this is where we will "model" our movie format
 const mongoose = require("mongoose");
 const validator = require("validator");
+const multer = require("multer");
 const Movie = mongoose.model("movie", {
   title: {
     type: String,
@@ -8,6 +9,10 @@ const Movie = mongoose.model("movie", {
   },
   year: {
     type: Number,
+    required: true
+  },
+  genre: {
+    type: String,
     required: true
   }
 });

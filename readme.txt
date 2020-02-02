@@ -67,3 +67,9 @@ Error I made. In review model I did not use uppercase R for the model!!!!!
 
 ***authenticating reviews
 add auth to reviews/:id
+
+
+
+
+****file uploads
+first show them how to upload just a profile picture with a simple destination

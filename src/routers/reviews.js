@@ -26,17 +26,48 @@ router.get("/reviews", async (req, res) => {
   }
 });
 router.get("/reviews/me", auth, async (req, res) => {
+  //we can also add a var like "select" or "match" here to add mores customization to our search
   try {
-    await req.user.populate("reviews").execPopulate();
+    const limit = parseInt(req.query.limit);
+    const skip = parseInt(req.query.skip);
+    await req.user
+      .populate({
+        path: "reviews",
+        //This is where we would add 'select or 'match'
+        options: {
+          limit: parseInt(req.query.limit),
+          skip: parseInt(req.query.skip)
+        }
+      })
+      .execPopulate();
+
     res.send(req.user.reviews);
   } catch (error) {
     res.status(500).send(error);
   }
 });
+/* router.get("/reviews/me", auth, async (req, res) => {
+  try {
+    await req.user.populate("reviews").execPopulate({
+      path: "Review",
+      options: {
+        limit: parseInt(req.query.limit),
+        skip: parseInt(req.query.skip)
+      }
+    });
+    res.send(req.user.reviews);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}); */
 router.get("/reviews/:id", async (req, res) => {
   const movie = req.params.id;
+  const limit = parseInt(req.query.limit);
+  const skip = parseInt(req.query.skip);
   try {
-    let reviews = await Review.find({ movie: movie });
+    let reviews = await Review.find({ movie: movie })
+      .skip(skip)
+      .limit(limit);
     res.send(reviews);
   } catch (error) {
     res.status(500).send(error);

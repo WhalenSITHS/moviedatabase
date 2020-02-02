@@ -30,13 +30,15 @@ router.get("/reviews/me", auth, async (req, res) => {
   try {
     const limit = parseInt(req.query.limit);
     const skip = parseInt(req.query.skip);
+    const sort = parseInt(req.query.sort);
     await req.user
       .populate({
         path: "reviews",
         //This is where we would add 'select or 'match'
         options: {
-          limit: parseInt(req.query.limit),
-          skip: parseInt(req.query.skip)
+          limit: parseInt(limit),
+          skip: parseInt(skip),
+          sort: { movie: sort }
         }
       })
       .execPopulate();
@@ -64,10 +66,13 @@ router.get("/reviews/:id", async (req, res) => {
   const movie = req.params.id;
   const limit = parseInt(req.query.limit);
   const skip = parseInt(req.query.skip);
+  const sort = parseInt(req.query.sort);
+
   try {
     let reviews = await Review.find({ movie: movie })
       .skip(skip)
-      .limit(limit);
+      .limit(limit)
+      .sort({ createdAt: sort });
     res.send(reviews);
   } catch (error) {
     res.status(500).send(error);

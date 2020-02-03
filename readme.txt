@@ -73,3 +73,5 @@ add auth to reviews/:id
 
 ****file uploads
 first show them how to upload just a profile picture with a simple destination
+
+go through multer npm and show them us adding the different fields based on the docs

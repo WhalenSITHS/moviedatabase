@@ -42,7 +42,17 @@ router.post("/users/logout", auth, async (req, res) => {
   }
 });
 const upload = multer({
-  dest: "profilePics"
+  dest: "profilePics",
+  limits: {
+    fileSize: 2000000
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(new Error("Please upload an image"));
+    }
+
+    cb(undefined, true);
+  }
 });
 router.post(
   "/users/me/profilePic",

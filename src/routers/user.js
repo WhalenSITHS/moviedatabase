@@ -121,4 +121,19 @@ router.patch("/users/:id", async (req, res) => {
   }
 });
 
+router.get("/users/:id/profilePic", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user || !user.profilePic) {
+      throw new Error();
+    }
+
+    res.set("Content-Type", "image/jpg");
+    res.send(user.profilePic);
+  } catch (e) {
+    res.status(404).send();
+  }
+});
+
 module.exports = router;

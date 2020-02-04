@@ -93,6 +93,11 @@ router.delete("/users/:id", async (req, res) => {
     res.status(500).send(error);
   }
 });
+router.delete("/users/me/profilePic", auth, async (req, res) => {
+  req.user.profilePic = undefined;
+  await req.user.save();
+  res.status(200).send("image removed");
+});
 router.patch("/users/:id", async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["name", "email", "graduated"];

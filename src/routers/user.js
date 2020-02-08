@@ -22,11 +22,7 @@ router.post("/users", async (req, res) => {
     res.status(400).send(error);
   }
 });
-app.get("/register", async (req, res) => {
-  try {
-    res.render("register");
-  } catch (error) {}
-});
+
 router.post("/users/login", async (req, res) => {
   try {
     const user = await User.findByCredentials(

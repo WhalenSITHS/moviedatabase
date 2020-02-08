@@ -3,13 +3,22 @@ const User = require("../models/user");
 const auth = require("../middleware/auth");
 const multer = require("multer");
 const router = new express.Router();
+const cookieParser = require("cookie-parser");
 const upload = require("../middleware/upload");
+const app = express();
+
+app.use(cookieParser());
 
 router.post("/users", async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
     const token = await user.generateToken(); //why lowercase?
+    res.cookie("jwt", token, {
+      expires: new Date(Date.now() + 30 * 24 * 50 * 60 * 1000),
+      //secure: true,
+      httpOnly: true
+    });
     res.send({ user, token });
   } catch (error) {
     console.log(error);
@@ -24,7 +33,14 @@ router.post("/users/login", async (req, res) => {
       req.body.password
     );
     const token = await user.generateToken(); //why lowercase?
+    res.cookie("jwt", token, {
+      expires: new Date(Date.now() + 30 * 24 * 50 * 60 * 1000),
+      //secure: true,
+      httpOnly: false
+    });
+    //const work = req.cookies.jwt;
     res.send({ user, token });
+    console.log(req.headers.cookie);
   } catch (error) {
     console.log(error);
     res.status(400).send("user not found");

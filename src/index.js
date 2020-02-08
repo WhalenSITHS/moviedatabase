@@ -1,17 +1,42 @@
 const express = require("express");
 require("./db/mongoose"); //ensures mongoose runs and connects
 const app = express();
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const hbs = require("hbs");
+
 //const mongoose = require("mongoose");
 const movieRouter = require("./routers/movies");
 const userRouter = require("./routers/user");
 const reviewRouter = require("./routers/reviews");
 const port = process.env.PORT || 3000;
-var cors = require("cors");
-app.use(cors);
 app.use(express.json());
 app.use(movieRouter);
 app.use(userRouter);
 app.use(reviewRouter);
+
+//define paths for express configs
+const publicDirectoryPath = path.join(__dirname, "../public");
+/* const viewsPath = path.join(__dirname, "../templates/views");
+const partialsPath = path.join(__dirname, "../templates/partials");
+
+//setup handlebars engine and views location
+
+app.set("view engine", "hbs");
+app.set("views", viewsPath);
+hbs.registerPartials(partialsPath); */
+
+//Setup static directory to serve
+app.use(express.static(publicDirectoryPath));
+app.get("", async (req, res) => {
+  try {
+    //console.log(req.cookies.jwt);
+    res.render("index");
+  } catch (error) {
+    res.status(500).send();
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });

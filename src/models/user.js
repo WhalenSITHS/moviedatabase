@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const mongodbErrorHandler = require("mongoose-mongodb-errors");
+const passportLocalMongoose = require("passport-local-mongoose");
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -26,17 +27,6 @@ const userSchema = new mongoose.Schema(
         }
       }
     },
-    password: {
-      type: String,
-      required: true,
-      minlength: 7,
-      trim: true,
-      validate(value) {
-        if (value.toLowerCase().includes("password")) {
-          throw new Error('Password cannot contain "password"');
-        }
-      }
-    },
     tokens: [
       {
         token: {
@@ -53,7 +43,8 @@ const userSchema = new mongoose.Schema(
     timestamps: true
   }
 );
-
+userSchema.plugin(passportLocalMongoose, { usernameField: "email" });
+userSchema.plugin(mongodbErrorHandler);
 userSchema.virtual("reviews", {
   ref: "Review",
   localField: "_id", //Where local data is stored

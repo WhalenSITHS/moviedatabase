@@ -2,9 +2,15 @@ const express = require("express");
 const User = require("../models/user");
 const auth = require("../middleware/auth");
 const multer = require("multer");
+const path = require("path");
 const router = new express.Router();
 const upload = require("../middleware/upload");
-
+const app = express();
+//define paths for express configs
+const publicDirectoryPath = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "../templates/views");
+const partialsPath = path.join(__dirname, "../templates/partials");
+app.use(express.static(publicDirectoryPath));
 router.post("/users", async (req, res) => {
   try {
     const user = new User(req.body);
@@ -16,7 +22,11 @@ router.post("/users", async (req, res) => {
     res.status(400).send(error);
   }
 });
-
+app.get("/register", async (req, res) => {
+  try {
+    res.render("register");
+  } catch (error) {}
+});
 router.post("/users/login", async (req, res) => {
   try {
     const user = await User.findByCredentials(
